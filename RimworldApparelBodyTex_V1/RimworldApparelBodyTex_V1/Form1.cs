@@ -120,9 +120,6 @@ namespace RimworldApparelBodyTex_V1
             checkedListBox_modFolder.Items.Add(@"E:\Game\Steam\steamapps\workshop\content\294100");
             checkedListBox_modFolder.Items.Add(@"E:\Game\Steam\steamapps\common\RimWorld\Mods");
             //LogInstalledSoftware();
-
-
-            
         }
 
 
