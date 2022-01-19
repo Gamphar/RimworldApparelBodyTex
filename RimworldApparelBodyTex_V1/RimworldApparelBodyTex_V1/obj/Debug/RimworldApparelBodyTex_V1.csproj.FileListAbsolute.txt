@@ -8,3 +8,13 @@ D:\Project_C#\RimworldApparelBodyTex\RimworldApparelBodyTex_V1\RimworldApparelBo
 D:\Project_C#\RimworldApparelBodyTex\RimworldApparelBodyTex_V1\RimworldApparelBodyTex_V1\obj\Debug\RimworldApparelBodyTex_V1.exe
 D:\Project_C#\RimworldApparelBodyTex\RimworldApparelBodyTex_V1\RimworldApparelBodyTex_V1\obj\Debug\RimworldApparelBodyTex_V1.pdb
 D:\Project_C#\RimworldApparelBodyTex\RimworldApparelBodyTex_V1\RimworldApparelBodyTex_V1\obj\Debug\RimworldApparelBodyTex_V1.Form1.resources
+D:\OneDrive\PC Kantor\Fendhi_Temp\C#\RimworldApparelBodyTex\RimworldApparelBodyTex_V1\RimworldApparelBodyTex_V1\bin\Debug\RimworldApparelBodyTex_V1.exe.config
+D:\OneDrive\PC Kantor\Fendhi_Temp\C#\RimworldApparelBodyTex\RimworldApparelBodyTex_V1\RimworldApparelBodyTex_V1\bin\Debug\RimworldApparelBodyTex_V1.exe
+D:\OneDrive\PC Kantor\Fendhi_Temp\C#\RimworldApparelBodyTex\RimworldApparelBodyTex_V1\RimworldApparelBodyTex_V1\bin\Debug\RimworldApparelBodyTex_V1.pdb
+D:\OneDrive\PC Kantor\Fendhi_Temp\C#\RimworldApparelBodyTex\RimworldApparelBodyTex_V1\RimworldApparelBodyTex_V1\obj\Debug\RimworldApparelBodyTex_V1.csproj.AssemblyReference.cache
+D:\OneDrive\PC Kantor\Fendhi_Temp\C#\RimworldApparelBodyTex\RimworldApparelBodyTex_V1\RimworldApparelBodyTex_V1\obj\Debug\RimworldApparelBodyTex_V1.Form1.resources
+D:\OneDrive\PC Kantor\Fendhi_Temp\C#\RimworldApparelBodyTex\RimworldApparelBodyTex_V1\RimworldApparelBodyTex_V1\obj\Debug\RimworldApparelBodyTex_V1.Properties.Resources.resources
+D:\OneDrive\PC Kantor\Fendhi_Temp\C#\RimworldApparelBodyTex\RimworldApparelBodyTex_V1\RimworldApparelBodyTex_V1\obj\Debug\RimworldApparelBodyTex_V1.csproj.GenerateResource.cache
+D:\OneDrive\PC Kantor\Fendhi_Temp\C#\RimworldApparelBodyTex\RimworldApparelBodyTex_V1\RimworldApparelBodyTex_V1\obj\Debug\RimworldApparelBodyTex_V1.csproj.CoreCompileInputs.cache
+D:\OneDrive\PC Kantor\Fendhi_Temp\C#\RimworldApparelBodyTex\RimworldApparelBodyTex_V1\RimworldApparelBodyTex_V1\obj\Debug\RimworldApparelBodyTex_V1.exe
+D:\OneDrive\PC Kantor\Fendhi_Temp\C#\RimworldApparelBodyTex\RimworldApparelBodyTex_V1\RimworldApparelBodyTex_V1\obj\Debug\RimworldApparelBodyTex_V1.pdb

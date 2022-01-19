@@ -117,8 +117,19 @@ namespace RimworldApparelBodyTex_V1
 
         private void btn_addModFolder_Click(object sender, EventArgs e)
         {
-            checkedListBox_modFolder.Items.Add(@"E:\Game\Steam\steamapps\workshop\content\294100");
-            checkedListBox_modFolder.Items.Add(@"E:\Game\Steam\steamapps\common\RimWorld\Mods");
+            if (textBox_rootModFolder.Text == "")
+            {
+                checkedListBox_modFolder.Items.Add(@"E:\Game\Steam\steamapps\workshop\content\294100");
+                checkedListBox_modFolder.Items.Add(@"E:\Game\Steam\steamapps\common\RimWorld\Mods");
+            }
+            else if (textBox_rootModFolder.Text.ToLower() == "kantor")
+            {
+                checkedListBox_modFolder.Items.Add(@"D:\Fendhi Baru\Misc\Steam\steamapps\common\RimWorld\Mods");
+            } else
+            {
+                checkedListBox_modFolder.Items.Add(textBox_rootModFolder.Text);
+            }
+            
             //LogInstalledSoftware();
         }
 
@@ -263,8 +274,14 @@ namespace RimworldApparelBodyTex_V1
         private void btn_UpdateBodyType_Click(object sender, EventArgs e)
         {
             IList<string> ModFolder = new List<string>();
-            FillUpStringListFromCheckedListkBox(ModFolder, checkedListBox_modFolder, 1);
+            FillUpStringListFromCheckedListkBox(ModFolder, checkedListBox_modFolder, 1); //only get checked items
 
+            if (ModFolder.Count<=0)
+            {
+                Log("Updating body type, but nothing to check, please select root of mod folder first.");
+                MessageBox.Show("Checked any root mod folder first!");
+                return;
+            }
 
             //set default
             comboBox_BodyTypeSource.Items.Clear();
@@ -387,13 +404,13 @@ namespace RimworldApparelBodyTex_V1
 
             if (!Directory.Exists(srcDir))
             {
-                MessageBox.Show("Source Directori is not exist!");
+                MessageBox.Show("Source Directory is not exist!");
                 return;
             }
 
             if (!Directory.Exists(dstDir))
             {
-                MessageBox.Show("Destination Directori is not exist!");
+                MessageBox.Show("Destination Directory is not exist!");
                 return;
             }
 
@@ -519,6 +536,14 @@ namespace RimworldApparelBodyTex_V1
         private void textBox_BodyTextDestination_TextChanged(object sender, EventArgs e)
         {
             CheckAndSetHARDestinationLocAsSourceLoc();
+        }
+
+        private void btn_remModFolder_Click(object sender, EventArgs e)
+        {
+            if (checkedListBox_modFolder.SelectedItems != null & checkedListBox_modFolder.SelectedItems.Count>0)
+            {
+                checkedListBox_modFolder.Items.Remove(checkedListBox_modFolder.SelectedItems[0]);
+            }
         }
     }
 

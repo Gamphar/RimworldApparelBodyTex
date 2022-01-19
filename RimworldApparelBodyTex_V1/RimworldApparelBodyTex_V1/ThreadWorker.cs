@@ -302,9 +302,12 @@ namespace RimworldApparelBodyTex_V1
 
             IList<string> ListBodyType = new List<string>();
 
+            //====================================================1
 
+            //Main Processing
             ListBodyTypToList(ListBodyType);
 
+            //====================================================1
             if (ListBodyType != null && ListBodyType.Count > 0)
             {
                 foreach (string BT in ListBodyType)

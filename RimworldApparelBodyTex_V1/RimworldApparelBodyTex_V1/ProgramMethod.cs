@@ -73,6 +73,7 @@ namespace RimworldApparelBodyTex_V1
             {
                 IList<string> AllFilePaths_Raw = new List<string>();
 
+                //List all files in selected mod folder
                 foreach(string ModFolder in MDirs)
                 {
                     Log("Listing all raw file from mod folder {0}", ModFolder);
@@ -111,6 +112,8 @@ namespace RimworldApparelBodyTex_V1
                 {
                     iFolderActiveMod++;
                     this.InvokeEx(f => f.textBox2.Text = iFolderActiveMod.ToString() + " / " + iTotalFolderActiveMod.ToString());
+                    this.InvokeEx(f => f.label_FolderActiveMod.Text = FolderActiveMod);
+
                     AllXMLInActiveMod.Clear();
                     ListAllFilesInDirectoryWithKeyword(FolderActiveMod, true, AllXMLInActiveMod, "*.xml");
 
@@ -123,6 +126,7 @@ namespace RimworldApparelBodyTex_V1
                     {
                         i++;
                         this.InvokeEx(f => f.textBox1.Text = i.ToString()+" / "+totalXml.ToString());
+                        this.InvokeEx(f => f.label_XMLFile.Text = XMLFile);
                         //string defNameBodyType = GetXMLNodeInnerText("/Defs/BodyTypeDef/defName", XMLFile);
                         IList<string> defNameBodyTypes = new List<string>();
                         defNameBodyTypes = GetListXMLNodeInnerText("/Defs/BodyTypeDef/defName", XMLFile);
