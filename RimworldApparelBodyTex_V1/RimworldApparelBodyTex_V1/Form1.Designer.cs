@@ -34,6 +34,9 @@ namespace RimworldApparelBodyTex_V1
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
             this.textBox_xml = new System.Windows.Forms.TextBox();
             this.btn_listModLoadOrder = new System.Windows.Forms.Button();
             this.textBox_log = new System.Windows.Forms.TextBox();
@@ -41,6 +44,8 @@ namespace RimworldApparelBodyTex_V1
             this.textBox_modConfig = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.label9 = new System.Windows.Forms.Label();
+            this.textBox_rootModFolder = new System.Windows.Forms.TextBox();
             this.panel4 = new System.Windows.Forms.Panel();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
@@ -49,6 +54,7 @@ namespace RimworldApparelBodyTex_V1
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.checkBox_ignoreActiveMod = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.textBox_TexDestinationPath = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -77,11 +83,7 @@ namespace RimworldApparelBodyTex_V1
             this.label5 = new System.Windows.Forms.Label();
             this.textBox_BodyTextSource = new System.Windows.Forms.TextBox();
             this.btn_genHarBodyTexFromVanillaTex = new System.Windows.Forms.Button();
-            this.textBox_rootModFolder = new System.Windows.Forms.TextBox();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -114,7 +116,7 @@ namespace RimworldApparelBodyTex_V1
             this.tabControl1.Location = new System.Drawing.Point(12, 12);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(776, 635);
+            this.tabControl1.Size = new System.Drawing.Size(779, 635);
             this.tabControl1.TabIndex = 6;
             // 
             // tabPage1
@@ -144,6 +146,33 @@ namespace RimworldApparelBodyTex_V1
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(762, 603);
             this.panel1.TabIndex = 8;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(3, 44);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(124, 13);
+            this.label12.TabIndex = 13;
+            this.label12.Text = "ModsConfig.xml preview:";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(19, 8);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(125, 13);
+            this.label11.TabIndex = 12;
+            this.label11.Text = "ModsConfig.xml Location";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(3, 297);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(32, 13);
+            this.label10.TabIndex = 11;
+            this.label10.Text = "LOG:";
             // 
             // textBox_xml
             // 
@@ -197,7 +226,7 @@ namespace RimworldApparelBodyTex_V1
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(768, 609);
+            this.tabPage2.Size = new System.Drawing.Size(771, 609);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Step 2 - Gen Apparel Tex";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -208,6 +237,7 @@ namespace RimworldApparelBodyTex_V1
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel2.BackColor = System.Drawing.Color.LightGray;
+            this.panel2.Controls.Add(this.checkBox1);
             this.panel2.Controls.Add(this.label9);
             this.panel2.Controls.Add(this.textBox_rootModFolder);
             this.panel2.Controls.Add(this.panel4);
@@ -218,8 +248,24 @@ namespace RimworldApparelBodyTex_V1
             this.panel2.Controls.Add(this.checkedListBox_modFolder);
             this.panel2.Location = new System.Drawing.Point(6, 6);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(756, 530);
+            this.panel2.Size = new System.Drawing.Size(759, 530);
             this.panel2.TabIndex = 0;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(30, 28);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(86, 13);
+            this.label9.TabIndex = 9;
+            this.label9.Text = "Root Mod Folder";
+            // 
+            // textBox_rootModFolder
+            // 
+            this.textBox_rootModFolder.Location = new System.Drawing.Point(122, 23);
+            this.textBox_rootModFolder.Name = "textBox_rootModFolder";
+            this.textBox_rootModFolder.Size = new System.Drawing.Size(511, 20);
+            this.textBox_rootModFolder.TabIndex = 8;
             // 
             // panel4
             // 
@@ -234,7 +280,7 @@ namespace RimworldApparelBodyTex_V1
             this.panel4.Controls.Add(this.textBox2);
             this.panel4.Location = new System.Drawing.Point(24, 168);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(609, 71);
+            this.panel4.Size = new System.Drawing.Size(612, 71);
             this.panel4.TabIndex = 7;
             // 
             // label8
@@ -294,6 +340,7 @@ namespace RimworldApparelBodyTex_V1
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.Color.Silver;
+            this.panel3.Controls.Add(this.checkBox_ignoreActiveMod);
             this.panel3.Controls.Add(this.tableLayoutPanel4);
             this.panel3.Controls.Add(this.btn_UpdateBodyType);
             this.panel3.Controls.Add(this.tableLayoutPanel2);
@@ -305,6 +352,16 @@ namespace RimworldApparelBodyTex_V1
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(609, 248);
             this.panel3.TabIndex = 6;
+            // 
+            // checkBox_ignoreActiveMod
+            // 
+            this.checkBox_ignoreActiveMod.AutoSize = true;
+            this.checkBox_ignoreActiveMod.Location = new System.Drawing.Point(432, 86);
+            this.checkBox_ignoreActiveMod.Name = "checkBox_ignoreActiveMod";
+            this.checkBox_ignoreActiveMod.Size = new System.Drawing.Size(113, 17);
+            this.checkBox_ignoreActiveMod.TabIndex = 9;
+            this.checkBox_ignoreActiveMod.Text = "Ignore Active Mod";
+            this.checkBox_ignoreActiveMod.UseVisualStyleBackColor = true;
             // 
             // tableLayoutPanel4
             // 
@@ -618,54 +675,21 @@ namespace RimworldApparelBodyTex_V1
             this.btn_genHarBodyTexFromVanillaTex.UseVisualStyleBackColor = true;
             this.btn_genHarBodyTexFromVanillaTex.Click += new System.EventHandler(this.btn_genHarBodyTexFromVanillaTex_Click);
             // 
-            // textBox_rootModFolder
+            // checkBox1
             // 
-            this.textBox_rootModFolder.Location = new System.Drawing.Point(122, 23);
-            this.textBox_rootModFolder.Name = "textBox_rootModFolder";
-            this.textBox_rootModFolder.Size = new System.Drawing.Size(511, 20);
-            this.textBox_rootModFolder.TabIndex = 8;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(30, 28);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(86, 13);
-            this.label9.TabIndex = 9;
-            this.label9.Text = "Root Mod Folder";
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(3, 297);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(32, 13);
-            this.label10.TabIndex = 11;
-            this.label10.Text = "LOG:";
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(19, 8);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(125, 13);
-            this.label11.TabIndex = 12;
-            this.label11.Text = "ModsConfig.xml Location";
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(3, 44);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(124, 13);
-            this.label12.TabIndex = 13;
-            this.label12.Text = "ModsConfig.xml preview:";
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(643, 469);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(113, 17);
+            this.checkBox1.TabIndex = 10;
+            this.checkBox1.Text = "Ignore Active Mod";
+            this.checkBox1.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 659);
+            this.ClientSize = new System.Drawing.Size(803, 659);
             this.Controls.Add(this.tabControl1);
             this.Name = "Form1";
             this.Text = "Rimworld Apparel Body Texture Gene";
@@ -749,6 +773,8 @@ namespace RimworldApparelBodyTex_V1
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.CheckBox checkBox_ignoreActiveMod;
+        private System.Windows.Forms.CheckBox checkBox1;
     }
 }
 

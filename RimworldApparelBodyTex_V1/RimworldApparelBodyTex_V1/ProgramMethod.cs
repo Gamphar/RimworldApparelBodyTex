@@ -82,28 +82,121 @@ namespace RimworldApparelBodyTex_V1
 
                 Log("Listing {0} files", AllFilePaths_Raw.Count);
 
+                //save AllFilePaths_Raw
+                string AllFilePaths_Raw_s = string.Join("\r\n", AllFilePaths_Raw);
+                File.WriteAllText("dump_AllFilePaths_Raw.txt", AllFilePaths_Raw_s);
+
+                bool bIgnoreActiveMod = checkBox_ignoreActiveMod.Checked;
 
                 IList<string> ListFolderActiveMod = new List<string>();
                 foreach (string filename in AllFilePaths_Raw)
                 {
                     if (filename.Contains("About.xml"))
                     {
+                        
 
-                        if (validAboutXMLbyList(filename, ModActivePackageIdList))
+                        if ((!bIgnoreActiveMod & validAboutXMLbyList(filename, ModActivePackageIdList)) | (bIgnoreActiveMod))
                         {
+                            Log("======================================================");
                             Log(filename);
                             string ModPath = Path.GetDirectoryName(filename); //about folder
-                            ModPath = Path.GetDirectoryName(ModPath); //dapet root folder,folder with mod name
-                            Log("Mod folder = {0}", ModPath);
+                            if (!MDirs.Contains(ModPath)) //prevent adding MDirs itself when get about folder
+                            {
+                                ModPath = Path.GetDirectoryName(ModPath); //dapet root folder, folder with mod name
+                                Log("Mod folder = {0}", ModPath);
 
-                            ListFolderActiveMod.Add(ModPath);
+                                if (!MDirs.Contains(ModPath)) //prevent adding MDirs itself when get root folder, folder with mod name
+                                {
 
+                                    //prevent futher about in version folder
+                                    string modName = ModPath;
+                                    string rootModName = "";
+
+                                    string rootDir = "";
+                                    foreach(string rd in MDirs)
+                                    {
+                                        if (ModPath.Contains(rd))
+                                        {
+                                            rootDir = rd;
+                                            break;
+                                        }
+                                    }
+
+
+
+                                    //foreach (string rootDir in MDirs)
+                                    {
+                                        Log("remove part = {0} from {1}", rootDir, modName);
+                                        modName = modName.Replace(rootDir,"");
+                                        if (modName.StartsWith("\\"))
+                                        {
+                                            Log("remove \\");
+                                            modName = modName.Remove(0,1);
+                                        }
+                                        Log("remove part result = {0}", modName);
+                                        if (modName == "")
+                                        {
+                                            //do nothing
+                                            //break;
+                                        } else
+                                        {
+
+                                            
+
+                                            Log("modName 1= {0}", modName);
+                                            if (modName != ModPath & rootModName == "")
+                                            {
+                                                Log("set rootModName = {0}", rootDir);
+                                                rootModName = rootDir;
+
+                                            }
+
+                                            modName = modName.Split('\\')[0];
+                                            Log("modName 2= {0}", modName);
+
+                                            if (rootModName != "")
+                                            {
+                                                Log("break");
+                                                //break;
+                                            }
+                                        }
+                                        
+
+                                        
+                                    }
+                                    if (rootModName != "" & modName !="")
+                                    {
+                                        ModPath = Path.Combine(rootModName, modName);
+                                    }
+                                    
+
+                                    ListFolderActiveMod.Add(ModPath);
+                                    Log("Add active mod = "+ModPath);
+                                }
+                            }
+
+
+                            Log("======================================================");
                         }
-
+                        
                     }
 
                 }
 
+                //remove duplicate
+                Log("remove dupe");
+                ListFolderActiveMod = ListFolderActiveMod.Distinct().ToList();
+
+                //log it
+                foreach(string sModPath in ListFolderActiveMod)
+                {
+                    Log("log active mod = {0}", sModPath);
+                }
+                Log("done log");
+                //save ListFolderActiveMod
+                File.WriteAllText("dump_ListFolderActiveMod.txt", string.Join("\r\n", ListFolderActiveMod) );
+
+                IList<string> scanLog = new List<string>(); //for log file
                 IList<string> AllXMLInActiveMod = new List<string>();
 
                 int iFolderActiveMod = 0;
@@ -113,16 +206,20 @@ namespace RimworldApparelBodyTex_V1
                     iFolderActiveMod++;
                     this.InvokeEx(f => f.textBox2.Text = iFolderActiveMod.ToString() + " / " + iTotalFolderActiveMod.ToString());
                     this.InvokeEx(f => f.label_FolderActiveMod.Text = FolderActiveMod);
+                    
 
                     AllXMLInActiveMod.Clear();
                     ListAllFilesInDirectoryWithKeyword(FolderActiveMod, true, AllXMLInActiveMod, "*.xml");
 
+                    //save AllXMLInActiveMod
+                    //File.WriteAllText("dump_AllXMLInActiveMod.txt", string.Join("\r\n", AllXMLInActiveMod));
 
                     int totalXml = AllXMLInActiveMod.Count;
                     int i = 0;
                     //Log("Total xml = {0}", totalXml);
+                    scanLog.Add(string.Format("#{0}, FolderActiveMod = {1}, totalXml = {2}", iFolderActiveMod, FolderActiveMod, totalXml));
 
-                    foreach(string XMLFile in AllXMLInActiveMod)
+                    foreach (string XMLFile in AllXMLInActiveMod)
                     {
                         i++;
                         this.InvokeEx(f => f.textBox1.Text = i.ToString()+" / "+totalXml.ToString());
@@ -130,6 +227,7 @@ namespace RimworldApparelBodyTex_V1
                         //string defNameBodyType = GetXMLNodeInnerText("/Defs/BodyTypeDef/defName", XMLFile);
                         IList<string> defNameBodyTypes = new List<string>();
                         defNameBodyTypes = GetListXMLNodeInnerText("/Defs/BodyTypeDef/defName", XMLFile);
+                        scanLog.Add(string.Format("------#{0}, XMLFile = {1}, defNameBodyTypes count = {2}", i, XMLFile, defNameBodyTypes==null?0:defNameBodyTypes.Count));
 
                         if (defNameBodyTypes != null)
                         foreach(string defNameBodyType in defNameBodyTypes)
@@ -154,7 +252,8 @@ namespace RimworldApparelBodyTex_V1
                     }
                 }
 
-
+                //save scanLog
+                File.WriteAllText("dump_scanLog.txt", string.Join("\r\n", scanLog));
 
 
 

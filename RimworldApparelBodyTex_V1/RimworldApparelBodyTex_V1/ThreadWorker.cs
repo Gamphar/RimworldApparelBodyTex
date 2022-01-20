@@ -182,6 +182,8 @@ namespace RimworldApparelBodyTex_V1
         }
 
 
+        
+
         public bool validAboutXMLbyList(string aboutxmlFilePath, List<ModActivePackageId> ActivePackageIdList)
         {
             //
@@ -193,11 +195,14 @@ namespace RimworldApparelBodyTex_V1
 
             string XMLstring = File.ReadAllText(aboutxmlFilePath);
 
+            //case sensitive
+            XMLstring = XMLstring.Replace("ModMetaData", "ModMetaData", StringComparison.OrdinalIgnoreCase);
+            XMLstring = XMLstring.Replace("packageId", "packageId", StringComparison.OrdinalIgnoreCase);
 
             XmlDocument XMLdoc = new XmlDocument();
             XMLdoc.LoadXml(XMLstring);
 
-            XmlNode RootNodeCheck = XMLdoc.SelectSingleNode("/ModMetaData");
+            XmlNode RootNodeCheck = XMLdoc.SelectSingleNode("/ModMetaData"); //NOTE: case sensitive
 
             if (RootNodeCheck is null)
             {
@@ -350,4 +355,6 @@ namespace RimworldApparelBodyTex_V1
         //end of public partial class Form1 : Form
     }
     //end of namespace RimworldApparelBodyTex_V1
+
+
 }

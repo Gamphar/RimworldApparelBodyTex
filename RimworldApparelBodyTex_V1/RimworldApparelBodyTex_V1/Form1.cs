@@ -105,9 +105,11 @@ namespace RimworldApparelBodyTex_V1
             Log("Select nodes");
             //XmlNodeList ActiveModsNode = ModsConfigDataNode.SelectNodes("/activeMods/li"); //not working
             XmlNodeList ActiveModsNode = XMLdoc.SelectNodes("/ModsConfigData/activeMods/li");
+            int i = 0;
             foreach (XmlNode Li in ActiveModsNode)
             {
-                Log("Li = " + Li.InnerText);
+                i++;
+                Log("#"+i.ToString()+" Li = " + Li.InnerText);
                 ModActivePackageId ActiveModID = new ModActivePackageId();
                 ActiveModID.PackageId = Li.InnerText;
                 ModActivePackageIdList.Add(ActiveModID);
