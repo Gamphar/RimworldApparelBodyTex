@@ -547,7 +547,36 @@ namespace RimworldApparelBodyTex_V1
                 checkedListBox_modFolder.Items.Remove(checkedListBox_modFolder.SelectedItems[0]);
             }
         }
+
+        private void btn_genBaseCoreApparel_Click(object sender, EventArgs e)
+        {
+            Param_Thread_ListBodyTypToList p = new Param_Thread_ListBodyTypToList();
+            p.cb = comboBox_BodyTypeSource;
+            p.cb_dest = comboBox_BodyTypeDestination;
+            startThread_GenBaseCoreApparel(p);
+        }
+
+
+        private void startThread_GenBaseCoreApparel(Param_Thread_ListBodyTypToList p)
+        {
+           
+            if (!IsThreadRun_GenBaseCoreApparel)
+            {
+
+                var th = new Thread(Thread_GenBaseCoreApparel);
+                th.IsBackground = true;
+                th.Start(p);
+                //Thread.Sleep(1000);
+                Log("Main thread ({0}) ",
+                                  Thread.CurrentThread.ManagedThreadId);
+
+
+            }
+            else { Log("<WARNING> Not allowed multiple instances of Gen Base Core Apparel."); }
+        }
+
     }
+
 
     public static class ISynchronizeInvokeExtensions
     {
