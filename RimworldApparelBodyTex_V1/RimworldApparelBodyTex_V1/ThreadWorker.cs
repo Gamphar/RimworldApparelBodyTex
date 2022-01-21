@@ -21,6 +21,7 @@ namespace RimworldApparelBodyTex_V1
         int iCount_skipNewTex = 0;
         int iCount_totalItems = 0;
         bool IsThreadRun_ListBodyTypToList = false;
+        IList<string> ValidExt = new List<string>();
 
         private void Thread_AddNewBody()
         {
@@ -38,6 +39,8 @@ namespace RimworldApparelBodyTex_V1
             iCount_skipNewTex = 0;
             iCount_totalItems = 0;
 
+            /*
+             * OLD COPY, NEW COPY BELOW
             //list about
             AllFileAndFolder_Raw.Clear();
             if (ModFolders.Count > 0)
@@ -50,14 +53,16 @@ namespace RimworldApparelBodyTex_V1
 
                 AllFileAndFolder_Edit = new List<string>(AllFileAndFolder_Raw); //copy for edit
 
-                Log("List about Filename:");
-                
+
+                bool bIgnoreActiveMod = checkBox1.Checked;
+                Log("List about Filename:");                
                 foreach (string filename in AllFileAndFolder_Raw)
                 {
                     if (filename.Contains("About.xml"))
                     {
 
-                        if (validAboutXMLbyList(filename, ModActivePackageIdList))
+                        //if (validAboutXMLbyList(filename, ModActivePackageIdList))
+                        if ((!bIgnoreActiveMod & validAboutXMLbyList(filename, ModActivePackageIdList)) | (bIgnoreActiveMod))
                         {
                             Log(filename);
                             SearchAndCopyTextureApparel(filename);
@@ -73,7 +78,18 @@ namespace RimworldApparelBodyTex_V1
             {
                 Log("No mod folder selected");
             }
+            */
 
+            //NEW COPY
+            ValidExt.Clear();
+            ValidExt.Add(".jpg");
+            ValidExt.Add(".png");
+            ValidExt.Add(".dds");
+            foreach (string ActiveModPath in ListFolderActiveMod)
+            {
+                SearchAndCopyTextureApparel(ActiveModPath);
+                Log("Added = {0}, Skipped = {1}, Checked = {2}", iCount_addNewTex, iCount_skipNewTex, iCount_totalItems);
+            }
 
             //end magic
             DateTime endTime = DateTime.Now;
@@ -84,16 +100,20 @@ namespace RimworldApparelBodyTex_V1
             IsThreadRun_AddNewBody = false;
         }
 
-        
 
-        public void SearchAndCopyTextureApparel(string AboutXMLfilepath)
+               
+        //public void SearchAndCopyTextureApparel(string AboutXMLfilepath)
+        public void SearchAndCopyTextureApparel(string ActiveModPath)
         {
             string BodyTypeSource = MySettings[0].BodyTypeSource; //"Female";
             string BodyTypeDestination = MySettings[0].BodyTypeDestination; //"FemaleBB";
 
             //Log(Path.GetDirectoryName(AboutXMLfilepath));
+            /*
             string ModPath = Path.GetDirectoryName(AboutXMLfilepath); //about folder
             ModPath = Path.GetDirectoryName(ModPath); //dapet root folder,folder with mod name
+            */
+            string ModPath = ActiveModPath;
 
 
             //target
@@ -110,6 +130,7 @@ namespace RimworldApparelBodyTex_V1
 
 
             //processing
+            IList<string> AllFilePaths = new List<string>();
 
             foreach (string dTex in ListDir)
             {
@@ -120,28 +141,40 @@ namespace RimworldApparelBodyTex_V1
                 if (Directory.Exists(TexSourcePath))
                 {
                     bool BIncludeBodyTex = MySettings[0].IncludeBodyTexture;//false;
-                    foreach (string imagePath in AllFileAndFolder_Edit.AsEnumerable().Reverse())
+
+                    AllFilePaths.Clear(); //refill each text source
+                    DirectorySearchAllFiles(AllFilePaths, TexSourcePath);
+                    
+                    //foreach (string imagePath in AllFileAndFolder_Edit.AsEnumerable().Reverse())
+                    foreach (string FilePath in AllFilePaths)
                     {
                         //
                         iCount_totalItems++;
                         if (
-                                //TODO: add option to include or exclude body texture using starting keyword Female_Naked_ or Male_Naked_ or Naked_
+                                
                                 (
-                                    BIncludeBodyTex &&
-                                    imagePath.Contains(TexSourcePath) && imagePath.Contains('_' + BodyTypeSource + '_')
+                                    ValidExt.Contains(Path.GetExtension(FilePath).ToLower())
                                 )
-                                ||
+                                &
                                 (
-                                    !BIncludeBodyTex &&
-                                    imagePath.Contains(TexSourcePath) && imagePath.Contains('_' + BodyTypeSource + '_') &&
-                                    !Path.GetFileNameWithoutExtension(imagePath).StartsWith("Female_Naked_" + BodyTypeSource + '_') &&
-                                    !Path.GetFileNameWithoutExtension(imagePath).StartsWith("Male_Naked_" + BodyTypeSource + '_') &&
-                                    !Path.GetFileNameWithoutExtension(imagePath).StartsWith("Naked_" + BodyTypeSource + '_')
+                                    //TODO: add option to include or exclude body texture using starting keyword Female_Naked_ or Male_Naked_ or Naked_
+                                    (
+                                        BIncludeBodyTex &&
+                                        FilePath.Contains(TexSourcePath) && FilePath.Contains('_' + BodyTypeSource + '_')
+                                    )
+                                    ||
+                                    (
+                                        !BIncludeBodyTex &&
+                                        FilePath.Contains(TexSourcePath) && FilePath.Contains('_' + BodyTypeSource + '_') &&
+                                        !Path.GetFileNameWithoutExtension(FilePath).StartsWith("Female_Naked_" + BodyTypeSource + '_') &&
+                                        !Path.GetFileNameWithoutExtension(FilePath).StartsWith("Male_Naked_" + BodyTypeSource + '_') &&
+                                        !Path.GetFileNameWithoutExtension(FilePath).StartsWith("Naked_" + BodyTypeSource + '_')
+                                    )
                                 )
 
                            )
                         {
-                            string NewImagePath = imagePath;
+                            string NewImagePath = FilePath;
                             NewImagePath = NewImagePath.Replace(TexSourcePath, TexDestinationPath); //replace dir
                             NewImagePath = NewImagePath.Replace('_' + BodyTypeSource + '_', '_' + BodyTypeDestination + '_'); //replace body
 
@@ -164,14 +197,14 @@ namespace RimworldApparelBodyTex_V1
 
                                 Log("<Do Copy> NewImagePath = {0}", NewImagePath);
                                 iCount_addNewTex++;
-                                File.Copy(imagePath, NewImagePath, true);
+                                File.Copy(FilePath, NewImagePath, true);
                             } else
                             {
                                 Log("<Skip Copy> File texture already exsist. Overwrite = {0}, Path = {1}", MySettings[0].Overwrite, NewImagePath);
                                 iCount_skipNewTex++;
                             }
 
-                            AllFileAndFolder_Edit.Remove(imagePath); //try to remove cus already used
+                            //AllFileAndFolder_Edit.Remove(imageFilePath); //try to remove cus already used
                         }
                     }
                 }
@@ -237,7 +270,7 @@ namespace RimworldApparelBodyTex_V1
         }
 
         List<string> AllFileAndFolder_Raw = new List<string>();
-        List<string> AllFileAndFolder_Edit;
+        List<string> AllFileAndFolder_Edit = new List<string>();
 
         public void DirectorySearch(string dir)
         {
@@ -255,6 +288,31 @@ namespace RimworldApparelBodyTex_V1
                     DirectorySearch(d);
                 }
                 
+
+            }
+            catch (System.Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+
+        public void DirectorySearchAllFiles(IList<string> FileList, string dir)
+        {
+
+            try
+            {
+                foreach (string f in Directory.GetFiles(dir))
+                {
+                    //str = str + dir + "\\" + (Path.GetFileName(f)) + "\r\n";
+                    //FileList.Add(dir + @"\" + Path.GetFileName(f));
+                    FileList.Add(f);
+                }
+                foreach (string d in Directory.GetDirectories(dir, "*"))
+                {
+
+                    DirectorySearchAllFiles(FileList, d);
+                }
+
 
             }
             catch (System.Exception ex)

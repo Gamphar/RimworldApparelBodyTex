@@ -57,6 +57,8 @@ namespace RimworldApparelBodyTex_V1
                               Thread.CurrentThread.ManagedThreadId);
         }
 
+        IList<string> ListFolderActiveMod = new List<string>();
+
         public void ListBodyTypToList(IList<string> ListBodyType)
         {
             IList<string> MDirs = new List<string>();
@@ -88,7 +90,8 @@ namespace RimworldApparelBodyTex_V1
 
                 bool bIgnoreActiveMod = checkBox_ignoreActiveMod.Checked;
 
-                IList<string> ListFolderActiveMod = new List<string>();
+                //IList<string> ListFolderActiveMod = new List<string>();
+                ListFolderActiveMod.Clear(); //reset ListFolderActiveMod
                 foreach (string filename in AllFilePaths_Raw)
                 {
                     if (filename.Contains("About.xml"))
