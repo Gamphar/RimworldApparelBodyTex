@@ -40,9 +40,15 @@ namespace RimworldApparelBodyTex_V1
             MySettingDefault.TexDestinationPath = @"E:\Game\Steam\steamapps\common\RimWorld\Mods\ApparelBody Support\Textures";
             MySettingDefault.Overwrite = false;
             MySettingDefault.IncludeBodyTexture = false;
+            MySettingDefault.RimworldData = @"E:\Game\Steam\steamapps\common\RimWorld\Data";
+            MySettingDefault.BaseSourceTexDir = @"D:\Game\MOD\Rimworld\Base Tex\Texture - Base Combine 3 DLC";
 
             MySettings.Add(MySettingDefault);
 
+
+            textBox_TexDestinationPath.Text = MySettings[0].TexDestinationPath;
+            textBox_rimworldData.Text = MySettings[0].RimworldData;
+            textBox_sourceTex.Text = MySettings[0].BaseSourceTexDir;
 
         }
 
@@ -340,37 +346,7 @@ namespace RimworldApparelBodyTex_V1
 
         }
 
-        public class ModMetaData
-        {
-            public string Name { get; set; }
-            public string PackageId { get; set; }
-        }
-
-        public class ModActivePackageId
-        {
-            public string PackageId { get; set; }
-        }
-
-        public class GlobalSettings
-        {
-            public bool Overwrite { get; set; }
-            public string BodyTypeSource { get; set; } //use defName
-            public string BodyTypeDestination { get; set; } //use defName
-            public string TexDestinationPath { get; set; }
-            public bool IncludeBodyTexture { get; set; }
-        }
-
-        public class InstalledProgram
-        {
-            public string DisplayName { get; set; }
-            public string Version { get; set; }
-            public string InstalledDate { get; set; }
-            public string Publisher { get; set; }
-            public string UnninstallCommand { get; set; }
-            public string ModifyPath { get; set; }
-
-            public string InstallLocation { get; set; }
-        }
+        
 
         private void comboBox_BodyTypeSource_TextChanged(object sender, EventArgs e)
         {
@@ -550,6 +526,30 @@ namespace RimworldApparelBodyTex_V1
 
         private void btn_genBaseCoreApparel_Click(object sender, EventArgs e)
         {
+            bool bSkipCheck = false;
+
+            if (!bSkipCheck & ListFolderActiveMod == null)
+            {
+                MessageBox.Show("something wrong, ListFolderActiveMod is not assigned");
+                return;
+            }
+            else if (!bSkipCheck & ListFolderActiveMod.Count<=0)
+            {
+                MessageBox.Show("Please update body type first");
+                return;
+            }
+
+            if (!bSkipCheck & comboBox_BodyTypeSource.Text == "")
+            {
+                MessageBox.Show("Please select source body type first");
+                return;
+            }
+            if (!bSkipCheck & comboBox_BodyTypeDestination.Text == "")
+            {
+                MessageBox.Show("Please select destination body type first");
+                return;
+            }
+
             Param_Thread_ListBodyTypToList p = new Param_Thread_ListBodyTypToList();
             p.cb = comboBox_BodyTypeSource;
             p.cb_dest = comboBox_BodyTypeDestination;
@@ -575,6 +575,15 @@ namespace RimworldApparelBodyTex_V1
             else { Log("<WARNING> Not allowed multiple instances of Gen Base Core Apparel."); }
         }
 
+        private void textBox_rimworldData_TextChanged(object sender, EventArgs e)
+        {
+            MySettings[0].RimworldData = textBox_rimworldData.Text;
+        }
+
+        private void textBox_sourceTex_TextChanged(object sender, EventArgs e)
+        {
+            MySettings[0].BaseSourceTexDir = textBox_sourceTex.Text;
+        }
     }
 
 

@@ -55,6 +55,11 @@ namespace RimworldApparelBodyTex_V1
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.panel5 = new System.Windows.Forms.Panel();
+            this.label14 = new System.Windows.Forms.Label();
+            this.textBox_rimworldData = new System.Windows.Forms.TextBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.textBox_sourceTex = new System.Windows.Forms.TextBox();
             this.btn_genBaseCoreApparel = new System.Windows.Forms.Button();
             this.checkBox_ignoreActiveMod = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
@@ -85,11 +90,6 @@ namespace RimworldApparelBodyTex_V1
             this.label5 = new System.Windows.Forms.Label();
             this.textBox_BodyTextSource = new System.Windows.Forms.TextBox();
             this.btn_genHarBodyTexFromVanillaTex = new System.Windows.Forms.Button();
-            this.panel5 = new System.Windows.Forms.Panel();
-            this.textBox_sourceTex = new System.Windows.Forms.TextBox();
-            this.label13 = new System.Windows.Forms.Label();
-            this.textBox_rimworldData = new System.Windows.Forms.TextBox();
-            this.label14 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -97,13 +97,13 @@ namespace RimworldApparelBodyTex_V1
             this.panel2.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panel3.SuspendLayout();
+            this.panel5.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             this.tabPage4.SuspendLayout();
-            this.panel5.SuspendLayout();
             this.SuspendLayout();
             // 
             // contextMenuStrip1
@@ -374,6 +374,57 @@ namespace RimworldApparelBodyTex_V1
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(609, 290);
             this.panel3.TabIndex = 6;
+            // 
+            // panel5
+            // 
+            this.panel5.BackColor = System.Drawing.Color.Chartreuse;
+            this.panel5.Controls.Add(this.label14);
+            this.panel5.Controls.Add(this.textBox_rimworldData);
+            this.panel5.Controls.Add(this.label13);
+            this.panel5.Controls.Add(this.textBox_sourceTex);
+            this.panel5.Controls.Add(this.btn_genBaseCoreApparel);
+            this.panel5.Location = new System.Drawing.Point(20, 184);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(583, 91);
+            this.panel5.TabIndex = 11;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(11, 16);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(76, 13);
+            this.label14.TabIndex = 14;
+            this.label14.Text = "Rimworld Data";
+            // 
+            // textBox_rimworldData
+            // 
+            this.textBox_rimworldData.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox_rimworldData.Location = new System.Drawing.Point(130, 13);
+            this.textBox_rimworldData.Name = "textBox_rimworldData";
+            this.textBox_rimworldData.Size = new System.Drawing.Size(450, 20);
+            this.textBox_rimworldData.TabIndex = 13;
+            this.textBox_rimworldData.TextChanged += new System.EventHandler(this.textBox_rimworldData_TextChanged);
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(10, 42);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(114, 13);
+            this.label13.TabIndex = 12;
+            this.label13.Text = "Source Base Core Tex";
+            // 
+            // textBox_sourceTex
+            // 
+            this.textBox_sourceTex.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox_sourceTex.Location = new System.Drawing.Point(130, 39);
+            this.textBox_sourceTex.Name = "textBox_sourceTex";
+            this.textBox_sourceTex.Size = new System.Drawing.Size(450, 20);
+            this.textBox_sourceTex.TabIndex = 11;
+            this.textBox_sourceTex.TextChanged += new System.EventHandler(this.textBox_sourceTex_TextChanged);
             // 
             // btn_genBaseCoreApparel
             // 
@@ -708,57 +759,6 @@ namespace RimworldApparelBodyTex_V1
             this.btn_genHarBodyTexFromVanillaTex.UseVisualStyleBackColor = true;
             this.btn_genHarBodyTexFromVanillaTex.Click += new System.EventHandler(this.btn_genHarBodyTexFromVanillaTex_Click);
             // 
-            // panel5
-            // 
-            this.panel5.BackColor = System.Drawing.Color.Chartreuse;
-            this.panel5.Controls.Add(this.label14);
-            this.panel5.Controls.Add(this.textBox_rimworldData);
-            this.panel5.Controls.Add(this.label13);
-            this.panel5.Controls.Add(this.textBox_sourceTex);
-            this.panel5.Controls.Add(this.btn_genBaseCoreApparel);
-            this.panel5.Location = new System.Drawing.Point(20, 184);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(583, 91);
-            this.panel5.TabIndex = 11;
-            // 
-            // textBox_sourceTex
-            // 
-            this.textBox_sourceTex.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox_sourceTex.Location = new System.Drawing.Point(130, 39);
-            this.textBox_sourceTex.Name = "textBox_sourceTex";
-            this.textBox_sourceTex.Size = new System.Drawing.Size(450, 20);
-            this.textBox_sourceTex.TabIndex = 11;
-            this.textBox_sourceTex.Text = "D:\\Game\\MOD\\Rimworld\\Base Tex\\Texture - Base Combine 3 DLC";
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(10, 42);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(114, 13);
-            this.label13.TabIndex = 12;
-            this.label13.Text = "Source Base Core Tex";
-            // 
-            // textBox_rimworldData
-            // 
-            this.textBox_rimworldData.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox_rimworldData.Location = new System.Drawing.Point(130, 13);
-            this.textBox_rimworldData.Name = "textBox_rimworldData";
-            this.textBox_rimworldData.Size = new System.Drawing.Size(450, 20);
-            this.textBox_rimworldData.TabIndex = 13;
-            this.textBox_rimworldData.Text = "E:\\Game\\Steam\\steamapps\\common\\RimWorld\\Data";
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(11, 16);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(76, 13);
-            this.label14.TabIndex = 14;
-            this.label14.Text = "Rimworld Data";
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -779,6 +779,8 @@ namespace RimworldApparelBodyTex_V1
             this.panel4.PerformLayout();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
+            this.panel5.ResumeLayout(false);
+            this.panel5.PerformLayout();
             this.tableLayoutPanel4.ResumeLayout(false);
             this.tableLayoutPanel4.PerformLayout();
             this.tableLayoutPanel2.ResumeLayout(false);
@@ -790,8 +792,6 @@ namespace RimworldApparelBodyTex_V1
             this.tableLayoutPanel3.PerformLayout();
             this.tabPage4.ResumeLayout(false);
             this.tabPage4.PerformLayout();
-            this.panel5.ResumeLayout(false);
-            this.panel5.PerformLayout();
             this.ResumeLayout(false);
 
         }
