@@ -32,6 +32,8 @@ namespace RimworldApparelBodyTex_V1
         public bool IncludeBodyTexture { get; set; }
         public string RimworldData { get; set; }
         public string BaseSourceTexDir { get; set; }
+        public string Step3_TexSourcePath { get; set; }
+        public string Step3_TexDestinationPath { get; set; }
     }
 
     public class InstalledProgram

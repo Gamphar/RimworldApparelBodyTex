@@ -137,6 +137,12 @@ namespace RimworldApparelBodyTex_V1
             {
                 checkedListBox_modFolder.Items.Add(textBox_rootModFolder.Text);
             }
+
+            //auto checked all item at first
+            for(int i = 0; i<checkedListBox_modFolder.Items.Count;i++)
+            {
+                checkedListBox_modFolder.SetItemChecked(i, true);
+            }
             
             //LogInstalledSoftware();
         }
@@ -583,6 +589,21 @@ namespace RimworldApparelBodyTex_V1
         private void textBox_sourceTex_TextChanged(object sender, EventArgs e)
         {
             MySettings[0].BaseSourceTexDir = textBox_sourceTex.Text;
+        }
+
+        private void btn_CopyFromStep2_Click(object sender, EventArgs e)
+        {
+            textBox_s3_TexDestinationPath.Text = textBox_TexDestinationPath.Text;
+        }
+
+        private void btn_CopyToStep2_Click(object sender, EventArgs e)
+        {
+            textBox_TexDestinationPath.Text = textBox_s3_TexDestinationPath.Text;
+        }
+
+        private void btn_ExcludeDestinationFromSource_Click(object sender, EventArgs e)
+        {
+            startThread_ExcludeDstFromSrc();
         }
     }
 

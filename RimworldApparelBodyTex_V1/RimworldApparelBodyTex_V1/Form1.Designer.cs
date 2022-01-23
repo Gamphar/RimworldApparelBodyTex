@@ -79,7 +79,22 @@ namespace RimworldApparelBodyTex_V1
             this.btn_remModFolder = new System.Windows.Forms.Button();
             this.btn_addModFolder = new System.Windows.Forms.Button();
             this.checkedListBox_modFolder = new System.Windows.Forms.CheckedListBox();
+            this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.panel6 = new System.Windows.Forms.Panel();
+            this.btn_ExcludeDestinationFromSource = new System.Windows.Forms.Button();
+            this.panel7 = new System.Windows.Forms.Panel();
+            this.btn_CopyToStep2 = new System.Windows.Forms.Button();
+            this.btn_CopyFromStep2 = new System.Windows.Forms.Button();
+            this.tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
+            this.textBox_s3_TexDestinationPath = new System.Windows.Forms.TextBox();
+            this.label17 = new System.Windows.Forms.Label();
+            this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
+            this.textBox_s3_TexSourcePath = new System.Windows.Forms.TextBox();
+            this.label16 = new System.Windows.Forms.Label();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
+            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.label15 = new System.Windows.Forms.Label();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.comboBox3 = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -101,7 +116,13 @@ namespace RimworldApparelBodyTex_V1
             this.tableLayoutPanel4.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
+            this.tabPage5.SuspendLayout();
+            this.panel6.SuspendLayout();
+            this.panel7.SuspendLayout();
+            this.tableLayoutPanel7.SuspendLayout();
+            this.tableLayoutPanel6.SuspendLayout();
             this.tabPage3.SuspendLayout();
+            this.tableLayoutPanel5.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             this.tabPage4.SuspendLayout();
             this.SuspendLayout();
@@ -118,6 +139,7 @@ namespace RimworldApparelBodyTex_V1
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tabPage5);
             this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Controls.Add(this.tabPage4);
             this.tabControl1.Location = new System.Drawing.Point(12, 12);
@@ -391,7 +413,7 @@ namespace RimworldApparelBodyTex_V1
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(11, 16);
+            this.label14.Location = new System.Drawing.Point(3, 19);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(76, 13);
             this.label14.TabIndex = 14;
@@ -410,11 +432,11 @@ namespace RimworldApparelBodyTex_V1
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(10, 42);
+            this.label13.Location = new System.Drawing.Point(1, 42);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(114, 13);
+            this.label13.Size = new System.Drawing.Size(127, 13);
             this.label13.TabIndex = 12;
-            this.label13.Text = "Source Base Core Tex";
+            this.label13.Text = "TexSourceBaseCorePath";
             // 
             // textBox_sourceTex
             // 
@@ -462,7 +484,8 @@ namespace RimworldApparelBodyTex_V1
             // 
             // textBox_TexDestinationPath
             // 
-            this.textBox_TexDestinationPath.Location = new System.Drawing.Point(133, 3);
+            this.textBox_TexDestinationPath.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox_TexDestinationPath.Location = new System.Drawing.Point(133, 4);
             this.textBox_TexDestinationPath.Name = "textBox_TexDestinationPath";
             this.textBox_TexDestinationPath.Size = new System.Drawing.Size(450, 20);
             this.textBox_TexDestinationPath.TabIndex = 8;
@@ -470,9 +493,9 @@ namespace RimworldApparelBodyTex_V1
             // 
             // label4
             // 
-            this.label4.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.label4.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(15, 8);
+            this.label4.Location = new System.Drawing.Point(3, 8);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(100, 13);
             this.label4.TabIndex = 5;
@@ -521,9 +544,9 @@ namespace RimworldApparelBodyTex_V1
             // 
             // label2
             // 
-            this.label2.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.label2.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(10, 8);
+            this.label2.Location = new System.Drawing.Point(3, 8);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(108, 13);
             this.label2.TabIndex = 5;
@@ -562,9 +585,9 @@ namespace RimworldApparelBodyTex_V1
             // 
             // label1
             // 
-            this.label1.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.label1.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(19, 8);
+            this.label1.Location = new System.Drawing.Point(3, 8);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(89, 13);
             this.label1.TabIndex = 5;
@@ -643,8 +666,141 @@ namespace RimworldApparelBodyTex_V1
             this.checkedListBox_modFolder.Size = new System.Drawing.Size(609, 109);
             this.checkedListBox_modFolder.TabIndex = 2;
             // 
+            // tabPage5
+            // 
+            this.tabPage5.Controls.Add(this.panel6);
+            this.tabPage5.Location = new System.Drawing.Point(4, 22);
+            this.tabPage5.Name = "tabPage5";
+            this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage5.Size = new System.Drawing.Size(771, 609);
+            this.tabPage5.TabIndex = 4;
+            this.tabPage5.Text = "Step 3 - Exclude Tex Final";
+            this.tabPage5.UseVisualStyleBackColor = true;
+            // 
+            // panel6
+            // 
+            this.panel6.BackColor = System.Drawing.Color.LightGray;
+            this.panel6.Controls.Add(this.btn_ExcludeDestinationFromSource);
+            this.panel6.Controls.Add(this.panel7);
+            this.panel6.Controls.Add(this.tableLayoutPanel7);
+            this.panel6.Controls.Add(this.tableLayoutPanel6);
+            this.panel6.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel6.Location = new System.Drawing.Point(3, 3);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(765, 232);
+            this.panel6.TabIndex = 0;
+            // 
+            // btn_ExcludeDestinationFromSource
+            // 
+            this.btn_ExcludeDestinationFromSource.Location = new System.Drawing.Point(194, 180);
+            this.btn_ExcludeDestinationFromSource.Name = "btn_ExcludeDestinationFromSource";
+            this.btn_ExcludeDestinationFromSource.Size = new System.Drawing.Size(385, 23);
+            this.btn_ExcludeDestinationFromSource.TabIndex = 13;
+            this.btn_ExcludeDestinationFromSource.Text = "Exclude Destination From Source";
+            this.btn_ExcludeDestinationFromSource.UseVisualStyleBackColor = true;
+            this.btn_ExcludeDestinationFromSource.Click += new System.EventHandler(this.btn_ExcludeDestinationFromSource_Click);
+            // 
+            // panel7
+            // 
+            this.panel7.Controls.Add(this.btn_CopyToStep2);
+            this.panel7.Controls.Add(this.btn_CopyFromStep2);
+            this.panel7.Location = new System.Drawing.Point(562, 64);
+            this.panel7.Name = "panel7";
+            this.panel7.Size = new System.Drawing.Size(200, 61);
+            this.panel7.TabIndex = 12;
+            // 
+            // btn_CopyToStep2
+            // 
+            this.btn_CopyToStep2.Location = new System.Drawing.Point(3, 32);
+            this.btn_CopyToStep2.Name = "btn_CopyToStep2";
+            this.btn_CopyToStep2.Size = new System.Drawing.Size(194, 23);
+            this.btn_CopyToStep2.TabIndex = 1;
+            this.btn_CopyToStep2.Text = "Copy To Step 2";
+            this.btn_CopyToStep2.UseVisualStyleBackColor = true;
+            this.btn_CopyToStep2.Click += new System.EventHandler(this.btn_CopyToStep2_Click);
+            // 
+            // btn_CopyFromStep2
+            // 
+            this.btn_CopyFromStep2.Location = new System.Drawing.Point(3, 3);
+            this.btn_CopyFromStep2.Name = "btn_CopyFromStep2";
+            this.btn_CopyFromStep2.Size = new System.Drawing.Size(194, 23);
+            this.btn_CopyFromStep2.TabIndex = 0;
+            this.btn_CopyFromStep2.Text = "Copy From Step 2";
+            this.btn_CopyFromStep2.UseVisualStyleBackColor = true;
+            this.btn_CopyFromStep2.Click += new System.EventHandler(this.btn_CopyFromStep2_Click);
+            // 
+            // tableLayoutPanel7
+            // 
+            this.tableLayoutPanel7.ColumnCount = 2;
+            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 130F));
+            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel7.Controls.Add(this.textBox_s3_TexDestinationPath, 1, 0);
+            this.tableLayoutPanel7.Controls.Add(this.label17, 0, 0);
+            this.tableLayoutPanel7.Dock = System.Windows.Forms.DockStyle.Top;
+            this.tableLayoutPanel7.Location = new System.Drawing.Point(0, 29);
+            this.tableLayoutPanel7.Name = "tableLayoutPanel7";
+            this.tableLayoutPanel7.RowCount = 1;
+            this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel7.Size = new System.Drawing.Size(765, 29);
+            this.tableLayoutPanel7.TabIndex = 11;
+            // 
+            // textBox_s3_TexDestinationPath
+            // 
+            this.textBox_s3_TexDestinationPath.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox_s3_TexDestinationPath.Location = new System.Drawing.Point(133, 4);
+            this.textBox_s3_TexDestinationPath.Name = "textBox_s3_TexDestinationPath";
+            this.textBox_s3_TexDestinationPath.Size = new System.Drawing.Size(629, 20);
+            this.textBox_s3_TexDestinationPath.TabIndex = 8;
+            this.textBox_s3_TexDestinationPath.Text = "E:\\Game\\Steam\\steamapps\\common\\RimWorld\\Mods\\[G] ApparelBody Support - FemaleVB\\T" +
+    "extures";
+            // 
+            // label17
+            // 
+            this.label17.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(3, 8);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(100, 13);
+            this.label17.TabIndex = 5;
+            this.label17.Text = "TexDestinationPath";
+            // 
+            // tableLayoutPanel6
+            // 
+            this.tableLayoutPanel6.ColumnCount = 2;
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 130F));
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel6.Controls.Add(this.textBox_s3_TexSourcePath, 1, 0);
+            this.tableLayoutPanel6.Controls.Add(this.label16, 0, 0);
+            this.tableLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Top;
+            this.tableLayoutPanel6.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel6.Name = "tableLayoutPanel6";
+            this.tableLayoutPanel6.RowCount = 1;
+            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel6.Size = new System.Drawing.Size(765, 29);
+            this.tableLayoutPanel6.TabIndex = 10;
+            // 
+            // textBox_s3_TexSourcePath
+            // 
+            this.textBox_s3_TexSourcePath.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox_s3_TexSourcePath.Location = new System.Drawing.Point(133, 4);
+            this.textBox_s3_TexSourcePath.Name = "textBox_s3_TexSourcePath";
+            this.textBox_s3_TexSourcePath.Size = new System.Drawing.Size(629, 20);
+            this.textBox_s3_TexSourcePath.TabIndex = 8;
+            this.textBox_s3_TexSourcePath.Text = "E:\\Game\\Steam\\steamapps\\common\\RimWorld\\Mods\\[G] NewBodyType - FemaleVB\\Textures";
+            // 
+            // label16
+            // 
+            this.label16.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(3, 8);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(81, 13);
+            this.label16.TabIndex = 5;
+            this.label16.Text = "TexSourcePath";
+            // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.tableLayoutPanel5);
             this.tabPage3.Controls.Add(this.tableLayoutPanel3);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
@@ -653,6 +809,38 @@ namespace RimworldApparelBodyTex_V1
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Template";
             this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // tableLayoutPanel5
+            // 
+            this.tableLayoutPanel5.ColumnCount = 2;
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 130F));
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel5.Controls.Add(this.textBox5, 1, 0);
+            this.tableLayoutPanel5.Controls.Add(this.label15, 0, 0);
+            this.tableLayoutPanel5.Location = new System.Drawing.Point(19, 50);
+            this.tableLayoutPanel5.Name = "tableLayoutPanel5";
+            this.tableLayoutPanel5.RowCount = 1;
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel5.Size = new System.Drawing.Size(586, 29);
+            this.tableLayoutPanel5.TabIndex = 9;
+            // 
+            // textBox5
+            // 
+            this.textBox5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox5.Location = new System.Drawing.Point(133, 4);
+            this.textBox5.Name = "textBox5";
+            this.textBox5.Size = new System.Drawing.Size(450, 20);
+            this.textBox5.TabIndex = 8;
+            // 
+            // label15
+            // 
+            this.label15.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(3, 8);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(100, 13);
+            this.label15.TabIndex = 5;
+            this.label15.Text = "TexDestinationPath";
             // 
             // tableLayoutPanel3
             // 
@@ -787,7 +975,16 @@ namespace RimworldApparelBodyTex_V1
             this.tableLayoutPanel2.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
+            this.tabPage5.ResumeLayout(false);
+            this.panel6.ResumeLayout(false);
+            this.panel7.ResumeLayout(false);
+            this.tableLayoutPanel7.ResumeLayout(false);
+            this.tableLayoutPanel7.PerformLayout();
+            this.tableLayoutPanel6.ResumeLayout(false);
+            this.tableLayoutPanel6.PerformLayout();
             this.tabPage3.ResumeLayout(false);
+            this.tableLayoutPanel5.ResumeLayout(false);
+            this.tableLayoutPanel5.PerformLayout();
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel3.PerformLayout();
             this.tabPage4.ResumeLayout(false);
@@ -857,6 +1054,21 @@ namespace RimworldApparelBodyTex_V1
         private System.Windows.Forms.TextBox textBox_rimworldData;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.TextBox textBox_sourceTex;
+        private System.Windows.Forms.TabPage tabPage5;
+        private System.Windows.Forms.Panel panel6;
+        private System.Windows.Forms.Button btn_ExcludeDestinationFromSource;
+        private System.Windows.Forms.Panel panel7;
+        private System.Windows.Forms.Button btn_CopyToStep2;
+        private System.Windows.Forms.Button btn_CopyFromStep2;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel7;
+        private System.Windows.Forms.TextBox textBox_s3_TexDestinationPath;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel6;
+        private System.Windows.Forms.TextBox textBox_s3_TexSourcePath;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel5;
+        private System.Windows.Forms.TextBox textBox5;
+        private System.Windows.Forms.Label label15;
     }
 }
 
