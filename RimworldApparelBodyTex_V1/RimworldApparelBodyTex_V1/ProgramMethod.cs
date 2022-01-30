@@ -16,6 +16,20 @@ namespace RimworldApparelBodyTex_V1
 
     public partial class Form1 : Form
     {
+
+
+        private void LogList(IList<string> List_Items, string Prefix)
+        {
+            int i = 0;
+            foreach (string Item in List_Items)
+            {
+                i++;
+                Log("#{0}, {1}{2}", i, Prefix, Item);
+            }
+
+        }
+
+
         public void ListModBodyTypeDefNameToComboBox(Param_Thread_ListBodyTypToList p)
         {
 

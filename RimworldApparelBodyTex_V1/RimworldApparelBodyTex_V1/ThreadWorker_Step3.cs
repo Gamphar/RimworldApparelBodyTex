@@ -68,12 +68,23 @@ namespace RimworldApparelBodyTex_V1
             //start run timer
             DateTime beginTime = DateTime.Now;
 
+            //labeling in
+            string defaultBtnLabel = "";
+            this.InvokeEx(f => defaultBtnLabel = f.btn_ExcludeDestinationFromSource.Text);
+            this.InvokeEx(f => f.btn_ExcludeDestinationFromSource.Text = "... In Progress ...");
+
+
             //start
             //=================================================================================1
             Thread_DoMoveTexDstToExcludeFolder();
 
             //=================================================================================1
             //end
+
+            //labeling out
+            this.InvokeEx(f => f.btn_ExcludeDestinationFromSource.Text = defaultBtnLabel);
+
+            //end timer
             DateTime endTime = DateTime.Now;
             TimeSpan runTime = endTime - beginTime;
 
@@ -99,17 +110,29 @@ namespace RimworldApparelBodyTex_V1
             IList<string> List_TexSrcFilePaths = new List<string>();            
             DirectorySearchAllFiles(List_TexSrcFilePaths, DirSrc, ValidExt);
 
+            if (List_TexSrcFilePaths.Count <= 0)
+            {
+                Log("No source tex, aborting exclude...");
+                return;
+            }
+
             //list all tex destination
             IList<string> List_TexDstFilePaths = new List<string>();
             DirectorySearchAllFiles(List_TexDstFilePaths, DirDst, ValidExt);
 
+            if (List_TexDstFilePaths.Count <= 0)
+            {
+                Log("No destination tex, aborting exclude...");
+                return;
+            }
+
             //compare and move
             string modDir = Path.GetDirectoryName(DirDst);
             string excludeDir = string.Format("{0}\\{1}", modDir,"[Exclude]");
-            if (!Directory.Exists(excludeDir))
-            {
-                Directory.CreateDirectory(excludeDir);
-            }
+            //if (!Directory.Exists(excludeDir))
+            //{
+            //    Directory.CreateDirectory(excludeDir);
+            //}
             IList<string> List_TexSrcFilePaths_Temp = new List<string>(List_TexSrcFilePaths);
             foreach (string TexDstFilePath in List_TexDstFilePaths)
             {

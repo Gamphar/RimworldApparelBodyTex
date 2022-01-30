@@ -401,25 +401,57 @@ namespace RimworldApparelBodyTex_V1
             //========================
 
             //get file image in the source
+            Log("source path = {0}", srcDir);
             IList<string> ListImageFilePath = new List<string>();
-            foreach (string f in Directory.GetFiles(srcDir))
+            
+            ValidExt.Clear();
+            ValidExt.Add(".jpg");
+            ValidExt.Add(".png");
+            ValidExt.Add(".dds");
+            DirectorySearchAllFiles(ListImageFilePath, srcDir, ValidExt);
+            //foreach (string f in Directory.GetFiles(srcDir))
+            //{
+            //    bool bValidExt = Path.GetExtension(f).ToLower() == ".png" | Path.GetExtension(f).ToLower() == ".jpg";
+            //    bool bValidName = Path.GetFileName(f).ToLower().StartsWith("naked");
+            //    Log("bValidExt {0}, bValidName {1}, path = {2}", bValidExt, bValidName, f);
+            //    if (bValidExt & bValidName)
+            //    {
+            //        Log("Found {0}, {1}", Path.GetExtension(f).ToLower(), f);
+            //        ListImageFilePath.Add(f);
+            //    } else
+            //    {
+            //        Log("Not valid, {0}", f);
+            //    }
+            //}
+
+
+            //filter only body tex included
+            IList<string> ListImageFilePath_Loop = new List<string>(ListImageFilePath);
+            foreach(string f in ListImageFilePath_Loop)
             {
-                bool bValidExt = Path.GetExtension(f).ToLower() == ".png" | Path.GetExtension(f).ToLower() == ".jpg";
                 bool bValidName = Path.GetFileName(f).ToLower().StartsWith("naked");
-                if (bValidExt & bValidName)
+                if (bValidName)
                 {
                     Log("Found {0}, {1}", Path.GetExtension(f).ToLower(), f);
-                    ListImageFilePath.Add(f);
+
                 } else
                 {
-                    Log("Not valid, {0}", f);
+                    ListImageFilePath.Remove(f);
                 }
-
-
             }
 
+
+            //log first the founded sources
+            Log("=================================");
+            Log("List Source total : #{0}", ListImageFilePath.Count);
+            for (int i = 0;i<ListImageFilePath.Count & ListImageFilePath.Count>0; i++)
+            {
+                string sPath = ListImageFilePath[i];
+                Log("#{0}, {1}",i+1, sPath);
+            }
+            Log("=================================");
             //process vanilla to HAR format
-            foreach(string srcFilePath in ListImageFilePath)
+            foreach (string srcFilePath in ListImageFilePath)
             {
                 string sourceFileName = Path.GetFileName(srcFilePath);
 
@@ -604,6 +636,21 @@ namespace RimworldApparelBodyTex_V1
         private void btn_ExcludeDestinationFromSource_Click(object sender, EventArgs e)
         {
             startThread_ExcludeDstFromSrc();
+        }
+
+        private void btn_GenBaseCoreApparelByDirectCopy_Click(object sender, EventArgs e)
+        {
+            startThread_GenBaseCoreApparelByDirectCopy();
+        }
+
+        private void panel8_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void btn_GenThingDefXML_Click(object sender, EventArgs e)
+        {
+            startThread_GenThingDefXML();
         }
     }
 

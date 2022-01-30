@@ -66,6 +66,7 @@ namespace RimworldApparelBodyTex_V1
         public string wornGraphicPath { get; set; }
         public string thingCategories { get; set; }
         public bool bTexParent { get; set; }
+        public bool bDefNameChild { get; set; }
         public ThingStyleDefObject ApparelStyle { get; set; }
     }
 
@@ -89,6 +90,20 @@ namespace RimworldApparelBodyTex_V1
     {
         public string ApparelID { get; set; }
         public string StyleID { get; set; }
+
+    }
+
+    //================
+    public class ThingDefObject
+    {
+        public string name { get; set; }
+        public string parentName { get; set; }
+        public bool IsAbstract { get; set; }
+        public string defName { get; set; }
+        public string label { get; set; }
+        public string wornGraphicPath { get; set; }
+        public string texPath { get; set; }
+        public string xmlFilePath { get; set; }
 
     }
 }

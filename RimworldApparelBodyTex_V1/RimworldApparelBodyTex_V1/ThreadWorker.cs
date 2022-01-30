@@ -343,6 +343,59 @@ namespace RimworldApparelBodyTex_V1
             }
         }
 
+        private bool FuncRuleset_ValidApparelTex_Female(string fileName)
+        {
+            string fn_lower = Path.GetFileName(fileName).ToLower();
+            string ext_lower = Path.GetExtension(fileName).ToLower();
+            bool bValid = fn_lower.Contains("_female_") &
+                (
+                    ext_lower.Equals(".jpg")
+                    | ext_lower.Equals(".jpeg")
+                    | ext_lower.Equals(".png")
+                    | ext_lower.Equals(".dds")
+                );
+            return bValid;
+        }
+
+        private bool FuncRuleset_ValidXMLFile(string fileName)
+        {            
+            string ext_lower = Path.GetExtension(fileName).ToLower();
+            bool bValid = 
+                (
+                    ext_lower.Equals(".xml")                    
+                );
+            return bValid;
+        }
+
+        public void DirectorySearchAllFiles_WithRuleset(IList<string> FileList, string dir, Func<string, bool> FuncRuleset)
+        {
+
+            try
+            {
+                foreach (string f in Directory.GetFiles(dir))
+                {                   
+                    bool b = FuncRuleset(f);
+
+                    if (b)
+                    {
+                        FileList.Add(f);
+                    }
+
+                }
+                foreach (string d in Directory.GetDirectories(dir, "*"))
+                {
+
+                    DirectorySearchAllFiles_WithRuleset(FileList, d, FuncRuleset);
+                }
+
+
+            }
+            catch (System.Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+
         IList<string> ListDir = new List<string>();
         public void ListDirectoryPathByName(string dirRootPath, string dirNameTarget)
         {
@@ -506,11 +559,22 @@ namespace RimworldApparelBodyTex_V1
 
             if (ListXMLFilePaths.Count > 0)
             {
-                foreach(string XMLFilePath in ListXMLFilePaths)
+                List_ApparelCat.Clear(); //untuk keperluan check kategori pakaian yg ada kata kunci apparel
+                foreach (string XMLFilePath in ListXMLFilePaths)
                 {
                     Log("======================check xml for apparel start");
+                    Log("check apparel xml = {0}", XMLFilePath);
                     Thread_SearchAndProcessApparelXML(XMLFilePath);
                     Log("======================check xml for apparel end");
+                }
+
+                //log apparel cat
+                List_ApparelCat = List_ApparelCat.Distinct().ToList();
+                int k = 0;
+                foreach(string sCat in List_ApparelCat)
+                {
+                    k++;
+                    Log("Apparel cat#{0} = {1}",k, sCat);
                 }
 
                 Log("Done listing base core apparel");
@@ -661,6 +725,7 @@ namespace RimworldApparelBodyTex_V1
 
         }
 
+        IList<string> List_ApparelCat = new List<string>();
         private bool Thread_SearchAndProcessApparelXML(string XMLFilePath)
         {
             //Apparel_Various.xml
@@ -715,7 +780,7 @@ namespace RimworldApparelBodyTex_V1
             Log("root node childs = {0}", RootNode.ChildNodes.Count);
 
             //=====================================================================1 start
-            Log("=============================base apparel start");
+            Log(">>>>>>>>>>=====================base apparel start");
             foreach (XmlNode nodeThingDef in RootNode.ChildNodes)
             {
                 int iAdd = 0;
@@ -728,14 +793,20 @@ namespace RimworldApparelBodyTex_V1
                 bool bValidApparel = false;
 
                 //thingCategories, check apparel validity from thingCategories that contain tag apparel
+                string sCat = "";
                 XmlNode thingCategoriesNode = nodeThingDef.SelectSingleNode("thingCategories");
                 if(thingCategoriesNode != null)
                 {
                     //if (thingCategoriesNode.ChildNodes.Count>0)
                     foreach(XmlNode li in thingCategoriesNode.ChildNodes)
                     {
-                        string sCat = li.InnerText;
-                        bValidApparel = sCat.ToLower().Equals("apparel");
+                        sCat = li.InnerText;
+                        bValidApparel = sCat.ToLower().Equals("apparel") | sCat.ToLower().Equals("apparelarmor") | sCat.ToLower().Equals("apparelnoble");
+                        if (sCat.ToLower().Contains("apparel"))
+                        {
+                            List_ApparelCat.Add(sCat);
+                        }
+                        break;
                     }
                 }
 
@@ -763,8 +834,11 @@ namespace RimworldApparelBodyTex_V1
                 }
                 */
 
+
+
                 if (bValidApparel)
                 {
+                    Log("valid {0}", sCat);
                     //defName
                     XmlNode defNameNode = nodeThingDef.SelectSingleNode("defName");
                     if (defNameNode != null)
@@ -772,50 +846,179 @@ namespace RimworldApparelBodyTex_V1
                         Log("defName = {0}", defNameNode.InnerText);
                         iAdd++;
                         Apparel.ApparelID = defNameNode.InnerText;
-                    }
 
-                    //label
-                    XmlNode labelNode = nodeThingDef.SelectSingleNode("label");
-                    if (labelNode != null)
-                    {
-                        Log("label = {0}", labelNode.InnerText);
-                        iAdd++;
-                        Apparel.label = labelNode.InnerText;
-                    }
+                        //label
+                        XmlNode labelNode = nodeThingDef.SelectSingleNode("label");
+                        if (labelNode != null)
+                        {
+                            Log("label = {0}", labelNode.InnerText);
+                            iAdd++;
+                            Apparel.label = labelNode.InnerText;
+                        }
 
-                    //texPath
-                    XmlNode texPathNode = nodeThingDef.SelectSingleNode("graphicData/texPath");
-                    if (texPathNode != null)
-                    {
-                        Log("textPath = {0}", texPathNode.InnerText);
-                        iAdd++;
-                        Apparel.texPath = texPathNode.InnerText;
+
+                        //wornGraphicPath
+                        XmlNode wornGraphicPathNode = nodeThingDef.SelectSingleNode("apparel/wornGraphicPath");
+                        if (wornGraphicPathNode != null)
+                        {
+                            Log("wornGraphicPath = {0}", wornGraphicPathNode.InnerText);
+                            iAdd++;
+                            Apparel.wornGraphicPath = wornGraphicPathNode.InnerText;
+                        }
+
+
+
+                        //texPath
+                        XmlNode texPathNode = nodeThingDef.SelectSingleNode("graphicData/texPath");
+                        if (texPathNode != null)
+                        {
+                            Log("textPath = {0}", texPathNode.InnerText);
+                            iAdd++;
+                            Apparel.texPath = texPathNode.InnerText;
+                        }
+                        else
+                        {
+                            //if texPathNode is null on first search then try to search in current file
+                            //But first, check for parent
+                            XmlAttribute thingDefParentNameAttr = nodeThingDef.Attributes["ParentName"];
+                            if (thingDefParentNameAttr != null)
+                            {
+                                string ParentName = thingDefParentNameAttr.Value;
+
+                                //now search again the thingdef
+                                foreach (XmlNode ThingDef1 in RootNode.ChildNodes)
+                                {
+                                    if (ThingDef1.Attributes != null)
+                                    {
+                                        XmlAttribute name = ThingDef1.Attributes["Name"];
+                                        if (name != null)
+                                            if (name.Value.ToLower() == ParentName.ToLower())
+                                            {
+                                                //now serach graphic texPath in parent
+                                                XmlNode texPathNode1 = ThingDef1.SelectSingleNode("graphicData/texPath");
+                                                if (texPathNode1 != null)
+                                                {
+                                                    Log("textPath = {0}", texPathNode1.InnerText);
+                                                    iAdd++;
+                                                    Apparel.texPath = texPathNode1.InnerText;
+                                                    Apparel.bTexParent = true;
+                                                }
+
+
+                                                //
+                                                break; //stop next search because we found the parent things
+                                            }
+                                    }
+
+                                }
+
+                            }
+
+                        }
+
+
+
                     } else
                     {
-                        //if texPathNode is null on first search then try to search in current file
-                        //But first, check for parent
-                        XmlAttribute thingDefParentNameAttr = nodeThingDef.Attributes["ParentName"];
-                        if (thingDefParentNameAttr != null)
+                        //if defName is null check if this abstract and search the child inheretor
+                        //but first store current name attribute so we know who use the current thingdef as parent
+                        XmlAttribute thingDefNameAttr = nodeThingDef.Attributes["Name"];
+                        if (thingDefNameAttr != null)
                         {
-                            string ParentName = thingDefParentNameAttr.Value;
-
-                            //now search again the thingdef
-                            foreach (XmlNode ThingDef1 in RootNode.ChildNodes)
+                            string AsParentName = thingDefNameAttr.Value;
+                            //now search again the thingdef with ParentName is AsParentName
+                            foreach (XmlNode ThingDef0 in RootNode.ChildNodes)
                             {
-                                if (ThingDef1.Attributes != null)
+                                if (ThingDef0.Attributes != null)
                                 {
-                                    XmlAttribute name = ThingDef1.Attributes["Name"];
+                                    XmlAttribute name = ThingDef0.Attributes["ParentName"];
                                     if (name != null)
-                                        if (name.Value.ToLower() == ParentName.ToLower())
+                                        if (name.Value.ToLower() == AsParentName.ToLower())
                                         {
-                                            //now serach graphic texPath in parent
-                                            XmlNode texPathNode1 = ThingDef1.SelectSingleNode("graphicData/texPath");
-                                            if (texPathNode1 != null)
+                                            //now serach defName in child
+                                            XmlNode defNameNode0 = ThingDef0.SelectSingleNode("defName");
+                                            if (defNameNode0 != null)
                                             {
-                                                Log("textPath = {0}", texPathNode1.InnerText);
+                                                Log("defNameNode0 = {0}", defNameNode0.InnerText);
                                                 iAdd++;
-                                                Apparel.texPath = texPathNode1.InnerText;
-                                                Apparel.bTexParent = true;
+                                                Apparel.ApparelID = defNameNode0.InnerText;
+                                                Apparel.bDefNameChild = true;
+
+                                                //label in child
+                                                XmlNode labelNode = ThingDef0.SelectSingleNode("label");
+                                                if (labelNode != null)
+                                                {
+                                                    Log("label in child = {0}", labelNode.InnerText);
+                                                    iAdd++;
+                                                    Apparel.label = labelNode.InnerText;
+                                                }
+
+
+
+                                                //wornGraphicPath in child
+                                                XmlNode wornGraphicPathNode = ThingDef0.SelectSingleNode("apparel/wornGraphicPath");
+                                                if (wornGraphicPathNode != null)
+                                                {
+                                                    Log("wornGraphicPath in child = {0}", wornGraphicPathNode.InnerText);
+                                                    iAdd++;
+                                                    Apparel.wornGraphicPath = wornGraphicPathNode.InnerText;
+                                                }
+
+
+
+
+                                                //texPath in child
+                                                XmlNode texPathNode = ThingDef0.SelectSingleNode("graphicData/texPath");
+                                                if (texPathNode != null)
+                                                {
+                                                    Log("textPath in child = {0}", texPathNode.InnerText);
+                                                    iAdd++;
+                                                    Apparel.texPath = texPathNode.InnerText;
+                                                }
+                                                else
+                                                {
+                                                    //if texPathNode is null on first search then try to search in current file
+                                                    //But first, check for parent
+                                                    XmlAttribute thingDefParentNameAttr = ThingDef0.Attributes["ParentName"];
+                                                    if (thingDefParentNameAttr != null)
+                                                    {
+                                                        string ParentName = thingDefParentNameAttr.Value;
+
+                                                        //now search again the thingdef
+                                                        foreach (XmlNode ThingDef1 in RootNode.ChildNodes)
+                                                        {
+                                                            if (ThingDef1.Attributes != null)
+                                                            {
+                                                                XmlAttribute name1 = ThingDef1.Attributes["Name"];
+                                                                if (name1 != null)
+                                                                    if (name1.Value.ToLower() == ParentName.ToLower())
+                                                                    {
+                                                                        //now serach graphic texPath in parent
+                                                                        XmlNode texPathNode1 = ThingDef1.SelectSingleNode("graphicData/texPath");
+                                                                        if (texPathNode1 != null)
+                                                                        {
+                                                                            Log("textPath in child parent = {0}", texPathNode1.InnerText);
+                                                                            iAdd++;
+                                                                            Apparel.texPath = texPathNode1.InnerText;
+                                                                            Apparel.bTexParent = true;
+                                                                        }
+
+
+                                                                        //
+                                                                        break; //stop next search because we found the parent things
+                                                                    }
+                                                            }
+
+                                                        }
+
+                                                    }
+
+                                                }
+
+
+
+
+
                                             }
 
 
@@ -823,22 +1026,75 @@ namespace RimworldApparelBodyTex_V1
                                             break; //stop next search because we found the parent things
                                         }
                                 }
-                                
                             }
-
                         }
-
                     }
 
+                    ////label
+                    //XmlNode labelNode = nodeThingDef.SelectSingleNode("label");
+                    //if (labelNode != null)
+                    //{
+                    //    Log("label = {0}", labelNode.InnerText);
+                    //    iAdd++;
+                    //    Apparel.label = labelNode.InnerText;
+                    //}
 
-                    //wornGraphicPath
-                    XmlNode wornGraphicPathNode = nodeThingDef.SelectSingleNode("apparel/wornGraphicPath");
-                    if (wornGraphicPathNode != null)
-                    {
-                        Log("wornGraphicPath = {0}", wornGraphicPathNode.InnerText);
-                        iAdd++;
-                        Apparel.wornGraphicPath = wornGraphicPathNode.InnerText;
-                    }
+                    ////texPath
+                    //XmlNode texPathNode = nodeThingDef.SelectSingleNode("graphicData/texPath");
+                    //if (texPathNode != null)
+                    //{
+                    //    Log("textPath = {0}", texPathNode.InnerText);
+                    //    iAdd++;
+                    //    Apparel.texPath = texPathNode.InnerText;
+                    //} else
+                    //{
+                    //    //if texPathNode is null on first search then try to search in current file
+                    //    //But first, check for parent
+                    //    XmlAttribute thingDefParentNameAttr = nodeThingDef.Attributes["ParentName"];
+                    //    if (thingDefParentNameAttr != null)
+                    //    {
+                    //        string ParentName = thingDefParentNameAttr.Value;
+
+                    //        //now search again the thingdef
+                    //        foreach (XmlNode ThingDef1 in RootNode.ChildNodes)
+                    //        {
+                    //            if (ThingDef1.Attributes != null)
+                    //            {
+                    //                XmlAttribute name = ThingDef1.Attributes["Name"];
+                    //                if (name != null)
+                    //                    if (name.Value.ToLower() == ParentName.ToLower())
+                    //                    {
+                    //                        //now serach graphic texPath in parent
+                    //                        XmlNode texPathNode1 = ThingDef1.SelectSingleNode("graphicData/texPath");
+                    //                        if (texPathNode1 != null)
+                    //                        {
+                    //                            Log("textPath = {0}", texPathNode1.InnerText);
+                    //                            iAdd++;
+                    //                            Apparel.texPath = texPathNode1.InnerText;
+                    //                            Apparel.bTexParent = true;
+                    //                        }
+
+
+                    //                        //
+                    //                        break; //stop next search because we found the parent things
+                    //                    }
+                    //            }
+                                
+                    //        }
+
+                    //    }
+
+                    //}
+
+
+                    ////wornGraphicPath
+                    //XmlNode wornGraphicPathNode = nodeThingDef.SelectSingleNode("apparel/wornGraphicPath");
+                    //if (wornGraphicPathNode != null)
+                    //{
+                    //    Log("wornGraphicPath = {0}", wornGraphicPathNode.InnerText);
+                    //    iAdd++;
+                    //    Apparel.wornGraphicPath = wornGraphicPathNode.InnerText;
+                    //}
 
 
 
@@ -853,7 +1109,7 @@ namespace RimworldApparelBodyTex_V1
                 }
 
             }
-            Log("=============================base apparel end");
+            Log(">>>>>>>>>>=====================base apparel end");
 
             
             //=====================================================================1 end

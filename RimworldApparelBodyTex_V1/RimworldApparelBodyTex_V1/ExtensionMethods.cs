@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
+using System.Xml.Linq;
 
 namespace RimworldApparelBodyTex_V1
 {
@@ -103,6 +105,47 @@ namespace RimworldApparelBodyTex_V1
 
             return resultStringBuilder.ToString();
 
+        }
+
+
+        
+
+    }
+
+    public static class DocumentExtensions
+    {
+
+        public static XDocument MergeXml(this XDocument xd1, XDocument xd2)
+        {
+            return new XDocument(
+                new XElement(xd2.Root.Name,
+                    xd2.Root.Attributes()
+                        .Concat(xd1.Root.Attributes())
+                        .GroupBy(g => g.Name)
+                        .Select(s => s.First()),
+                    xd2.Root.Elements()
+                        .Concat(xd1.Root.Elements())
+                        .GroupBy(g => g.Name)
+                        .Select(s => s.First())));
+        }
+
+        public static XmlDocument ToXmlDocument(this XDocument xDocument)
+        {
+            var xmlDocument = new XmlDocument();
+            using (var xmlReader = xDocument.CreateReader())
+            {
+                xmlDocument.Load(xmlReader);
+            }
+            return xmlDocument;
+        }
+
+        public static XDocument ToXDocument(this XmlDocument xmlDocument)
+        {
+            using (var nodeReader = new XmlNodeReader(xmlDocument))
+            {
+                nodeReader.MoveToContent();
+                return XDocument.Load(nodeReader);
+            }
         }
     }
 
