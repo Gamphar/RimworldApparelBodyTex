@@ -453,6 +453,11 @@ namespace RimworldApparelBodyTex_V1
                     this.InvokeEx(f => cb.Items.Add(BT));
                     this.InvokeEx(f => cb_dest.Items.Add(BT));
                 }
+
+                //save list
+                string s = GetComboboxItemsToString( cb);
+                File.WriteAllText("set_ListBodyType.txt", s);
+
             } else { Log("No Body Type found..."); }
 
             //cb.Enabled = true;
@@ -466,6 +471,21 @@ namespace RimworldApparelBodyTex_V1
                               Thread.CurrentThread.ManagedThreadId, timeRun);
 
             IsThreadRun_ListBodyTypToList = false;
+        }
+
+        public string GetComboboxItemsToString(ComboBox cb)
+        {
+            string s = "";
+            List<string> list = new List<string>();
+            
+            foreach (string BT in cb.Items)
+            {
+                list.Add(BT);
+            }
+
+            s = string.Join("\n", list.ToArray());
+
+            return s;
         }
 
         public void ThreadStart_ListBodyTypToList(Param_Thread_ListBodyTypToList p)

@@ -62,6 +62,7 @@
     <Compile Include="ThreadWorker_GenBaseByDirectCopy.cs" />
     <Compile Include="ThreadWorker_GenThingDefXML.cs" />
     <Compile Include="ThreadWorker_Step3.cs" />
+    <Compile Include="ThreadWorker_Workshop.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>

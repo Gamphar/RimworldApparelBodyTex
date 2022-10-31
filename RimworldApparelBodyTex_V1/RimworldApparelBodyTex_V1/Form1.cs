@@ -168,17 +168,17 @@ namespace RimworldApparelBodyTex_V1
 
 
 
-                return;
-            List<string> registry_keys = new List<string>() {
-              @"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall",
-              @"SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall"
-            };
+            return;
+            //List<string> registry_keys = new List<string>() {
+            //  @"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall",
+            //  @"SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall"
+            //};
 
-            foreach(string reg_key in registry_keys)
-            {
-                Log(reg_key);
-                ListUninstallAppsFromRegKey(reg_key);
-            }
+            //foreach(string reg_key in registry_keys)
+            //{
+            //    Log(reg_key);
+            //    ListUninstallAppsFromRegKey(reg_key);
+            //}
 
 
 
@@ -287,6 +287,26 @@ namespace RimworldApparelBodyTex_V1
 
         private void btn_UpdateBodyType_Click(object sender, EventArgs e)
         {
+
+            if (File.Exists("set_ListBodyType.txt"))
+            {
+                DialogResult dr = MessageBox.Show("Load local?", "Confirm", MessageBoxButtons.YesNoCancel);
+                if (dr == DialogResult.Cancel)
+                {
+                    return;
+                } else if(dr == DialogResult.Yes)
+                {
+                    LoadListBodyTypeFromLocal();
+                    return;
+                } else if(dr == DialogResult.No)
+                {
+                    //do nothing, just go below
+                }
+            }
+
+
+
+
             IList<string> ModFolder = new List<string>();
             FillUpStringListFromCheckedListkBox(ModFolder, checkedListBox_modFolder, 1); //only get checked items
 
@@ -320,6 +340,15 @@ namespace RimworldApparelBodyTex_V1
             p.cb_dest = comboBox_BodyTypeDestination;
 
             ListModBodyTypeDefNameToComboBox(p);
+        }
+
+        public void LoadListBodyTypeFromLocal()
+        {
+            
+            string s = File.ReadAllText("set_ListBodyType.txt");
+            comboBox_BodyTypeSource.DataSource = s;
+            comboBox_BodyTypeDestination.DataSource = s;
+
         }
 
         public void FillUpStringListFromCheckedListkBox(IList<string> IList, CheckedListBox checkedListBox, int iMode)
@@ -651,6 +680,16 @@ namespace RimworldApparelBodyTex_V1
         private void btn_GenThingDefXML_Click(object sender, EventArgs e)
         {
             startThread_GenThingDefXML();
+        }
+
+        private void btn_GetAllModWorkshop_Click(object sender, EventArgs e)
+        {
+            startThread_GetAllModWorkshop();
+        }
+
+        private void btn_backupMod_Click(object sender, EventArgs e)
+        {
+
         }
     }
 
