@@ -118,6 +118,9 @@ namespace RimworldApparelBodyTex_V1
             this.label18 = new System.Windows.Forms.Label();
             this.tabPage7 = new System.Windows.Forms.TabPage();
             this.panel9 = new System.Windows.Forms.Panel();
+            this.btn_resub = new System.Windows.Forms.Button();
+            this.btn_backupMod = new System.Windows.Forms.Button();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.btn_GetAllModWorkshop = new System.Windows.Forms.Button();
             this.tableLayoutPanel11 = new System.Windows.Forms.TableLayoutPanel();
             this.textBox_tab7_outputData = new System.Windows.Forms.TextBox();
@@ -125,9 +128,8 @@ namespace RimworldApparelBodyTex_V1
             this.tableLayoutPanel10 = new System.Windows.Forms.TableLayoutPanel();
             this.textBox_tab7_sourceData = new System.Windows.Forms.TextBox();
             this.label20 = new System.Windows.Forms.Label();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.btn_backupMod = new System.Windows.Forms.Button();
-            this.btn_resub = new System.Windows.Forms.Button();
+            this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.copyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -154,15 +156,17 @@ namespace RimworldApparelBodyTex_V1
             this.tableLayoutPanel8.SuspendLayout();
             this.tabPage7.SuspendLayout();
             this.panel9.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tableLayoutPanel11.SuspendLayout();
             this.tableLayoutPanel10.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.contextMenuStrip2.SuspendLayout();
             this.SuspendLayout();
             // 
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
+            this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
             // 
             // tabControl1
             // 
@@ -1134,6 +1138,36 @@ namespace RimworldApparelBodyTex_V1
             this.panel9.Size = new System.Drawing.Size(950, 472);
             this.panel9.TabIndex = 0;
             // 
+            // btn_resub
+            // 
+            this.btn_resub.Location = new System.Drawing.Point(862, 278);
+            this.btn_resub.Name = "btn_resub";
+            this.btn_resub.Size = new System.Drawing.Size(75, 23);
+            this.btn_resub.TabIndex = 16;
+            this.btn_resub.Text = "Resub";
+            this.btn_resub.UseVisualStyleBackColor = true;
+            // 
+            // btn_backupMod
+            // 
+            this.btn_backupMod.Location = new System.Drawing.Point(862, 249);
+            this.btn_backupMod.Name = "btn_backupMod";
+            this.btn_backupMod.Size = new System.Drawing.Size(75, 23);
+            this.btn_backupMod.TabIndex = 15;
+            this.btn_backupMod.Text = "Backup";
+            this.btn_backupMod.UseVisualStyleBackColor = true;
+            this.btn_backupMod.Click += new System.EventHandler(this.btn_backupMod_Click);
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.ContextMenuStrip = this.contextMenuStrip2;
+            this.dataGridView1.Location = new System.Drawing.Point(6, 93);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.Size = new System.Drawing.Size(941, 150);
+            this.dataGridView1.TabIndex = 14;
+            // 
             // btn_GetAllModWorkshop
             // 
             this.btn_GetAllModWorkshop.Location = new System.Drawing.Point(133, 64);
@@ -1212,34 +1246,19 @@ namespace RimworldApparelBodyTex_V1
             this.label20.TabIndex = 5;
             this.label20.Text = "Source Data";
             // 
-            // dataGridView1
+            // contextMenuStrip2
             // 
-            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(6, 93);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(941, 150);
-            this.dataGridView1.TabIndex = 14;
+            this.contextMenuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.copyToolStripMenuItem});
+            this.contextMenuStrip2.Name = "contextMenuStrip2";
+            this.contextMenuStrip2.Size = new System.Drawing.Size(181, 48);
             // 
-            // btn_backupMod
+            // copyToolStripMenuItem
             // 
-            this.btn_backupMod.Location = new System.Drawing.Point(862, 249);
-            this.btn_backupMod.Name = "btn_backupMod";
-            this.btn_backupMod.Size = new System.Drawing.Size(75, 23);
-            this.btn_backupMod.TabIndex = 15;
-            this.btn_backupMod.Text = "Backup";
-            this.btn_backupMod.UseVisualStyleBackColor = true;
-            this.btn_backupMod.Click += new System.EventHandler(this.btn_backupMod_Click);
-            // 
-            // btn_resub
-            // 
-            this.btn_resub.Location = new System.Drawing.Point(862, 278);
-            this.btn_resub.Name = "btn_resub";
-            this.btn_resub.Size = new System.Drawing.Size(75, 23);
-            this.btn_resub.TabIndex = 16;
-            this.btn_resub.Text = "Resub";
-            this.btn_resub.UseVisualStyleBackColor = true;
+            this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
+            this.copyToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.copyToolStripMenuItem.Text = "Copy";
+            this.copyToolStripMenuItem.Click += new System.EventHandler(this.copyToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -1291,11 +1310,12 @@ namespace RimworldApparelBodyTex_V1
             this.tableLayoutPanel8.PerformLayout();
             this.tabPage7.ResumeLayout(false);
             this.panel9.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.tableLayoutPanel11.ResumeLayout(false);
             this.tableLayoutPanel11.PerformLayout();
             this.tableLayoutPanel10.ResumeLayout(false);
             this.tableLayoutPanel10.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.contextMenuStrip2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1399,6 +1419,8 @@ namespace RimworldApparelBodyTex_V1
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Button btn_resub;
         private System.Windows.Forms.Button btn_backupMod;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip2;
+        private System.Windows.Forms.ToolStripMenuItem copyToolStripMenuItem;
     }
 }
 

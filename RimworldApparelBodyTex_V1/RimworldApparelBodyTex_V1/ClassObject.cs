@@ -111,7 +111,7 @@ namespace RimworldApparelBodyTex_V1
     //folder watcher
     class MyClassCS
     {
-        static void Main()
+        void Main()
         {
             var watcher = new FileSystemWatcher(@"C:\path\to\folder");
 

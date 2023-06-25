@@ -129,6 +129,7 @@ namespace RimworldApparelBodyTex_V1
             {
                 checkedListBox_modFolder.Items.Add(@"E:\Game\Steam\steamapps\workshop\content\294100");
                 checkedListBox_modFolder.Items.Add(@"E:\Game\Steam\steamapps\common\RimWorld\Mods");
+                checkedListBox_modFolder.Items.Add(@"E:\Game\Steam\steamapps\common\RimWorld\Data");
             }
             else if (textBox_rootModFolder.Text.ToLower() == "kantor")
             {
@@ -317,22 +318,32 @@ namespace RimworldApparelBodyTex_V1
                 return;
             }
 
+            var bForceAddBase1dot3Body = false;
+
             //set default
             comboBox_BodyTypeSource.Items.Clear();
-            comboBox_BodyTypeSource.Items.Add("Fat");
-            comboBox_BodyTypeSource.Items.Add("Female");
-            comboBox_BodyTypeSource.Items.Add("Hulk");
-            comboBox_BodyTypeSource.Items.Add("Male");
-            comboBox_BodyTypeSource.Items.Add("Thin");
+            if (bForceAddBase1dot3Body)
+            {
+                comboBox_BodyTypeSource.Items.Add("Fat");
+                comboBox_BodyTypeSource.Items.Add("Female");
+                comboBox_BodyTypeSource.Items.Add("Hulk");
+                comboBox_BodyTypeSource.Items.Add("Male");
+                comboBox_BodyTypeSource.Items.Add("Thin");
+            }
+            
 
 
 
             comboBox_BodyTypeDestination.Items.Clear();
-            comboBox_BodyTypeDestination.Items.Add("Fat");
-            comboBox_BodyTypeDestination.Items.Add("Female");
-            comboBox_BodyTypeDestination.Items.Add("Hulk");
-            comboBox_BodyTypeDestination.Items.Add("Male");
-            comboBox_BodyTypeDestination.Items.Add("Thin");
+            if (bForceAddBase1dot3Body)
+            {
+                comboBox_BodyTypeDestination.Items.Add("Fat");
+                comboBox_BodyTypeDestination.Items.Add("Female");
+                comboBox_BodyTypeDestination.Items.Add("Hulk");
+                comboBox_BodyTypeDestination.Items.Add("Male");
+                comboBox_BodyTypeDestination.Items.Add("Thin");
+            }
+            
 
             //add from active mod
             Param_Thread_ListBodyTypToList p = new Param_Thread_ListBodyTypToList();
@@ -690,6 +701,16 @@ namespace RimworldApparelBodyTex_V1
         private void btn_backupMod_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
+        {
+
+        }
+
+        private void copyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            CopyDGVSelectedCellText(dataGridView1);
         }
     }
 

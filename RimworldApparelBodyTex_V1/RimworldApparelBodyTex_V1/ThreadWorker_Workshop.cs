@@ -120,6 +120,16 @@ namespace RimworldApparelBodyTex_V1
             IList<string> List_ModID = new List<string>();
             IList<string> List_ModUrlID = new List<string>();
 
+            IList<int> MaxColsWidth = new List<int>();
+            MaxColsWidth.Add(0);
+            MaxColsWidth.Add(0);
+            MaxColsWidth.Add(0);
+            MaxColsWidth.Add(0);
+
+            //clear old data
+            this.InvokeEx(f => f.dataGridView1.Rows.Clear());
+            this.InvokeEx(f => f.dataGridView1.Refresh());
+
             Log("listing workshop mods");
 
             string dir = DirSrc;
@@ -173,17 +183,30 @@ namespace RimworldApparelBodyTex_V1
                     }
                     List_ModID.Add(modID);
 
+
+                    //date folder modified
+                    DateTime dt = Directory.GetLastWriteTime(d);
+
+                    //list mod data in UI
                     Log("Mod Name = {0}, id = {1}, workshop id = {2}, path = {3}", ModName, modID, modUrlID, d);
                     //DGV.RowCount += 1;
                     //this.InvokeEx(f => f.dataGridView1.RowCount +=1);
                     if (colcount == 0)
                     {
-                        colcount = 4;
+                        colcount = 5;
                         this.InvokeEx(f => f.dataGridView1.ColumnCount = colcount);
+                        this.InvokeEx(f => f.dataGridView1.Columns[0].HeaderText = "Name");
+                        this.InvokeEx(f => f.dataGridView1.Columns[1].HeaderText = "Package ID");
+                        this.InvokeEx(f => f.dataGridView1.Columns[2].HeaderText = "ID");
+                        this.InvokeEx(f => f.dataGridView1.Columns[3].HeaderText = "Path");
+                        this.InvokeEx(f => f.dataGridView1.Columns[3].HeaderText = "Date");
+
+
                     }
                     //this.InvokeEx(f => f.dataGridView1[0, f.dataGridView1.RowCount-2].Value = ModName);
-                    this.InvokeEx(f => f.dataGridView1.Rows.Add(ModName, modID, modUrlID, d));
-
+                    this.InvokeEx(f => f.dataGridView1.Rows.Add(ModName, modID, modUrlID, d, dt));
+                    //this.InvokeEx(f => f.dataGridView1.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.DisplayedCells));
+                    this.InvokeEx(f => f.dataGridView1.AutoResizeColumns());
 
 
                 }
@@ -192,5 +215,16 @@ namespace RimworldApparelBodyTex_V1
 
             }
         }
-    }
+
+        void CopyDGVSelectedCellText(DataGridView DGV)
+        {
+            if (DGV.SelectedCells.Count > 0)
+            {
+                string text = DGV.SelectedCells[0].Value as string;
+            Log(text);
+            }
+            
+        }
+
+    } //form1
 }
